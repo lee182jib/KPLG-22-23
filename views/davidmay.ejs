@@ -1,0 +1,122 @@
+<% layout('layouts/boilerplate') %>
+
+  <h1 class="text-center">David May's Winning 11</h1>
+
+  <div class="container">
+    This is a container.
+  </div>
+
+  <div class="text-center mx-auto card-group">
+    <% for(let gk of bestKeeper) {%>
+      <div class="card" style="min-width: 13rem;">
+        <img class="card-img-top"
+          src="<%= `https://resources.premierleague.com/premierleague/photos/players/250x250/p${gk.photo.replace('jpg', 'png')}` %>"
+          alt="Card image cap">
+        <div class="card-body">
+          <p class="card-text">
+            <%= gk.web_name %>
+          </p>
+          <p class="card-text">Total Points -
+            <%= gk.total_points %>
+          </p>
+          <p class="card-text">Clean Sheets -
+            <%= gk.clean_sheets %>
+          </p>
+          <p class="card-text">Goals Conceded -
+            <%= gk.goals_conceded %>
+          </p>
+        </div>
+      </div>
+      <% } %>
+  </div>
+
+  <div class="text-center mx-auto card-group">
+    <div class="card" style="min-width: 13rem;">
+      <img class="card-img-top"
+        src="/img/dMay4removebg.png"
+        alt="Card image cap">
+      <div class="card-body">
+        <p class="card-text">
+          David May
+        </p>
+        <p class="card-text">Total Points -
+          <%= dmStats[0] %> 
+        </p>
+        <p class="card-text">Clean Sheets -
+          <%= dmStats[1] %> 
+        </p>
+        <p class="card-text">Goals Conceded -
+          0
+        </p>
+      </div>
+    </div>
+    <% for(let def of bestDefenders) {%>
+      <div class="card" style="min-width: 13rem;">
+        <img class="card-img-top"
+          src="<%= `https://resources.premierleague.com/premierleague/photos/players/250x250/p${def.photo.replace('jpg', 'png')}` %>"
+          alt="Card image cap">
+        <div class="card-body">
+          <p class="card-text">
+            <%= def.web_name %>
+          </p>
+          <p class="card-text">Total Points -
+            <%= def.total_points %>
+          </p>
+          <p class="card-text">Clean Sheets -
+            <%= def.clean_sheets %>
+          </p>
+          <p class="card-text">Goals Conceded -
+            <%= def.goals_conceded %>
+          </p>
+        </div>
+      </div>
+      <% } %>
+  </div>
+
+  <div class="text-center mx-auto card-group">
+    <% for(let mid of bestMidfielders) {%>
+      <div class="card" style="min-width: 13rem;">
+        <img class="card-img-top"
+          src="<%= `https://resources.premierleague.com/premierleague/photos/players/250x250/p${mid.photo.replace('jpg', 'png')}` %>"
+          alt="Card image cap">
+        <div class="card-body">
+          <p class="card-text">
+            <%= mid.web_name %>
+          </p>
+          <p class="card-text">Total Points -
+            <%= mid.total_points %>
+          </p>
+          <p class="card-text">Assists -
+            <%= mid.assists %>
+          </p>
+          <p class="card-text">Goals Scored -
+            <%= mid.goals_scored %>
+          </p>
+        </div>
+      </div>
+      <% } %>
+  </div>
+
+  <div class="text-center mx-auto card-group">
+    <% for(let fw of bestForwards) {%>
+      <div class="card" style="min-width: 13rem;">
+        <img class="card-img-top"
+          src="<%= `https://resources.premierleague.com/premierleague/photos/players/250x250/p${fw.photo.replace('jpg', 'png')}` %>"
+          alt="Card image cap">
+        <div class="card-body">
+          <p class="card-text">
+            <%= fw.web_name %>
+          </p>
+          <p class="card-text">Total Points -
+            <%= fw.total_points %>
+          </p>
+          <p class="card-text">Assists -
+            <%= fw.assists %>
+          </p>
+          <p class="card-text">Goals Scored -
+            <%= fw.goals_scored %>
+          </p>
+        </div>
+      </div>
+      <% } %>
+  </div>

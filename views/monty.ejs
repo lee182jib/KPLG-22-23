@@ -1,0 +1,10 @@
+<% layout('layouts/boilerplate') %>
+
+<ul>
+  <% for(let q of quiz) {%> 
+    <li>
+      <p><%= q.question %> </p>
+      <p><%= q.correct_answer %> </p>
+    </li>
+    <% } %> 
+</ul>

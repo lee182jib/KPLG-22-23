@@ -1,0 +1,111 @@
+<% layout('layouts/boilerplate') %>
+
+<div class="mx-auto flex-wrap text-center d-inline-flex">
+  <a class="btn btn-info" href="/gameweek/<%= gw - 1 %>">GW<%= gw - 1 %></a>
+  <h1 class="text-center">Gameweek <%= gw %>
+  </h1>
+  <a class="btn btn-info" href="/gameweek/<%= parseFloat(gw) + 1%>">GW<%= parseFloat(gw) + 1 %></a>
+</div>
+  
+
+  <table class="table table-bordered">
+    <tbody>
+      <% for(let result of gameweekData.data.results) { %>
+        <tr>
+          <td class="text-muted">
+            <%= result.entry_1_player_name %>
+          </td>
+            <% if(result.entry_1_win===1) { %>
+          <td class="table-success">
+            <%= result.entry_1_name %>
+          </td>
+            <% } else { %>
+          <td>
+            <%= result.entry_1_name %>
+          </td>
+            <% } %>
+          <td>
+            <%= result.entry_1_points %>
+          </td>
+
+          <td>v</td>
+
+          <td>
+            <%= result.entry_2_points %>
+          </td>
+            <% if(result.entry_2_win===1) { %>
+          <td class="table-success">
+            <%= result.entry_2_name %>
+          </td>
+            <% } else { %>
+          <td>
+            <%= result.entry_2_name %>
+          </td>
+            <% } %>
+          <td class="text-muted">
+            <%= result.entry_2_player_name %>
+          </td>
+            <% } %>
+
+          </tr>
+    </tbody>
+  </table>
+
+  <div class="card-group d-flex flex-wrap w-75 text-center mx-auto">
+    <div class="card" style="width: 18rem;">
+      <h5 class="card-title">Most Selected</h5>
+      <img
+        src="<%= `https://resources.premierleague.com/premierleague/photos/players/250x250/p${foundMostSelected.photo.replace('jpg', 'png')}` %>"
+        class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-text">
+          <%= foundMostSelected.web_name %>
+        </h5>
+        <ul class="list-group list-group-flush">
+          <li>GW<%= gw %> Points: <%= playerDataGw.top_element_info.points %>
+          </li>
+
+        </ul>
+      </div>
+    </div>
+
+    <div class="card" style="width: 18rem;">
+      <h5 class="card-title">Most Transfered In</h5>
+      <img
+        src="<%= `https://resources.premierleague.com/premierleague/photos/players/250x250/p${foundMostTransferedIn.photo.replace('jpg', 'png')}` %>"
+        class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-text">
+          <%= foundMostTransferedIn.web_name %>
+        </h5>
+        <ul class="list-group list-group-flush">
+          <li>GW<%= gw %> Transfers In: <%= foundMostTransferedIn.transfers_in_event %>
+          </li>
+
+        </ul>
+      </div>
+    </div>
+
+    <div class="card" style="width: 18rem;">
+      <h5 class="card-title">Most Captained</h5>
+      <img
+        src="<%=`https://resources.premierleague.com/premierleague/photos/players/250x250/p${foundMostCaptained.photo.replace('jpg', 'png')}` %>"
+        class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-text">
+          <%= foundMostCaptained.web_name %>
+        </h5>
+        <ul class="list-group list-group-flush">
+          <li>GW<%= gw %> Transfers In: <%= foundMostTransferedIn.transfers_in_event %>
+          </li>
+
+        </ul>
+      </div>
+    </div>
+
+    
+  </div>
+  
+  </body>
+
+</html>

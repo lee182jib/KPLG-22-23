@@ -1,0 +1,24 @@
+<% layout('layouts/boilerplate') %>
+
+  <h1 class="text-center">Stinkers of the Week</h1>
+  <img src="/img/stink2.jpg" alt="" srcset="">
+
+  
+
+  <div class="text-center mx-auto card-group row">
+    <% for(let stinkPlayer of stinkPlayers) {%>
+      <div class="col-md-4">
+        <img class="card-img-top"
+          src="<%= `https://resources.premierleague.com/premierleague/photos/players/250x250/p${stinkPlayer.photo.replace('jpg', 'png')}` %>"
+          alt="Card image cap">
+        <div class="card-body">
+          <p class="card-text">
+            <%= stinkPlayer.web_name %> - <%= stinkPlayer.transfers_out_event.  toLocaleString("en-US"); %> Transfers Out This Week
+          </p>
+          <p class="card-text">
+            <%= stinkPlayer.news %> 
+          </p>
+        </div>
+      </div>
+      <% } %>
+  </div>

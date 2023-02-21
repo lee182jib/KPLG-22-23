@@ -1,0 +1,190 @@
+<% layout('layouts/boilerplate') %>
+
+
+<h1>The Hipster Calculator</h1>
+<p>The highest scoring players selected by no more than <b><%= percent %>%</b> of managers </p>
+
+<form method="GET" action="/hipster">
+  <input type="number" class="form-control-sm" step="0.1" min="0.1" max="25" name="percent" value="<%= percent %>"placeholder="<%= percent %>% "/>
+  <input type="submit" value="search" />
+  <div class="form-check">
+  <input class="form-check-input" type="checkbox" value="true" id="flexCheckDefault" name="zeroPercent"> Include 0 point players in averages
+</div>
+</form>
+
+
+<h3>Goalkeepers</h3>
+<h5>Highest Total Points: <%= highScoreKeeper.web_name %> - <%= highScoreKeeper.total_points %> points</h5>
+<h5>Average GK points: <%= avScoreKeeper %> </h5>
+<h5>Avreage GK excluding players with 0 points: <%= zeroPercentAvgKeeper %> </h5>
+<h5>Average GK percent points <%= percentAvgKeeper %> </h5>
+<table class="table table-striped table-dark table-bordered">
+  <thead>
+    <tr>
+      <th scope="col"></th>
+      <th scope="col">Total points</th>
+      <th scope="col">Selected by %</th>
+      <th scope="col">Best GK points difference</th>
+      <th scope="col">Avg GK points difference</th>
+      <th scope="col"><%= percent %>% Avg points difference</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% for(let hk of bestHipKeepers) { %> 
+
+    <tr>
+      <th scope="row"><img class="card-img-top " style="max-height: 100px; max-width: 100px;" src="<%= `https://resources.premierleague.com/premierleague/photos/players/250x250/p${hk.photo.replace('jpg', 'png')}` %>" alt="Card image cap">
+        <%= hk.web_name %>
+      </th>
+      <td><%= hk.total_points %></td>
+      <td><%= hk.selected_by_percent %>%</td>
+      <td><%= hk.total_points - highScoreKeeper.total_points%></td>
+
+      <% if(hk.total_points - avScoreKeeper > 0) { %> 
+      <td>+<%= hk.total_points - avScoreKeeper%></td>
+      <% } else { %>
+      <td><%= hk.total_points - avScoreKeeper%></td>
+      <% } %> 
+
+      <% if(hk.total_points - percentAvgKeeper > 0) { %> 
+        <td>+<%= hk.total_points - percentAvgKeeper%></td>
+        <% } else { %>
+        <td><%= hk.total_points - percentAvgKeeper%></td>
+        <% } %> 
+    </tr>
+    <% } %> 
+  </tbody>
+</table>
+
+<!------------------------- DEFENDERS ------------------------->
+<h3>Defenders</h3>
+<h5>Highest Total Points: <%= highScoreDef.web_name %> - <%= highScoreDef.total_points %> points</h5>
+<h5>Average DF points: <%= avScoreDef %> </h5>
+<h5>Average DF percent points <%= percentAvgDef %> </h5>
+<table class="table table-striped table-dark table-bordered">
+  <thead>
+    <tr>
+      <th scope="col"></th>
+      <th scope="col">Selected by %</th>
+      <th scope="col">Total points</th>
+      <th scope="col">Best DF points difference</th>
+      <th scope="col">Avg DF points difference</th>
+      <th scope="col">5% Avg points difference</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% for(let df of bestHipDef) { %> 
+
+    <tr>
+      <th scope="row"><img class="card-img-top " style="max-height: 100px; max-width: 100px;" src="<%= `https://resources.premierleague.com/premierleague/photos/players/250x250/p${df.photo.replace('jpg', 'png')}` %>" alt="Card image cap">
+        <%= df.web_name %>
+      </th>
+      
+      <td><%= df.selected_by_percent %>%</td>
+      <td><%= df.total_points %></td>
+      <td><%= df.total_points - highScoreDef.total_points%></td>
+
+      <% if(df.total_points - avScoreDef > 0) { %> 
+      <td>+<%= df.total_points - avScoreDef%></td>
+      <% } else { %>
+      <td><%= df.total_points - avScoreDef%></td>
+      <% } %> 
+
+      <% if(df.total_points - percentAvgDef > 0) { %> 
+        <td>+<%= df.total_points - percentAvgDef%></td>
+        <% } else { %>
+        <td><%= df.total_points - percentAvgDef%></td>
+        <% } %> 
+    </tr>
+    <% } %> 
+  </tbody>
+</table>
+
+<!------------------------- MIDFIELDERS ------------------------->
+<h3>Midfielders</h3>
+<h5>Highest Total Points: <%= highScoreMid.web_name %> - <%= highScoreMid.total_points %> points</h5>
+<h5>Average MD points: <%= avScoreMid %> </h5>
+<h5>Average MD percent points <%= percentAvgDef %> </h5>
+<table class="table table-striped table-dark table-bordered">
+  <thead>
+    <tr>
+      <th scope="col"></th>
+      <th scope="col">Selected by %</th>
+      <th scope="col">Total points</th>
+      <th scope="col">Best MD points difference</th>
+      <th scope="col">Avg MD points difference</th>
+      <th scope="col">5% Avg points difference</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% for(let md of bestHipMid) { %> 
+
+    <tr>
+      <th scope="row"><img class="card-img-top " style="max-height: 100px; max-width: 100px;" src="<%= `https://resources.premierleague.com/premierleague/photos/players/250x250/p${md.photo.replace('jpg', 'png')}` %>" alt="Card image cap">
+        <%= md.web_name %>
+      </th>
+      
+      <td><%= md.selected_by_percent %>%</td>
+      <td><%= md.total_points %></td>
+      <td><%= md.total_points - highScoreMid.total_points%></td>
+
+      <% if(md.total_points - avScoreMid > 0) { %> 
+      <td>+<%= md.total_points - avScoreMid%></td>
+      <% } else { %>
+      <td><%= md.total_points - avScoreMid%></td>
+      <% } %> 
+
+      <% if(md.total_points - percentAvgMid > 0) { %> 
+        <td>+<%= md.total_points - percentAvgMid%></td>
+        <% } else { %>
+        <td><%= md.total_points - percentAvgMid%></td>
+        <% } %> 
+    </tr>
+    <% } %> 
+  </tbody>
+</table>
+
+
+<!------------------------- FORWARDS ------------------------->
+<h3>Forwards</h3>
+<h5>Highest Total Points: <%= highScoreFw.web_name %> - <%= highScoreFw.total_points %> points</h5>
+<h5>Average FWD points: <%= avScoreFw %> </h5>
+<h5>Average FWD percent points <%= percentAvgFw %> </h5>
+<table class="table table-striped table-dark table-bordered">
+  <thead>
+    <tr>
+      <th scope="col"></th>
+      <th scope="col">Selected by %</th>
+      <th scope="col">Total points</th>
+      <th scope="col">Best MD points difference</th>
+      <th scope="col">Avg MD points difference</th>
+      <th scope="col">5% Avg points difference</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% for(let fw of bestHipFw) { %> 
+
+    <tr>
+      <th scope="row"><img class="card-img-top " style="max-height: 100px; max-width: 100px;" src="<%= `https://resources.premierleague.com/premierleague/photos/players/250x250/p${fw.photo.replace('jpg', 'png')}` %>" alt="Card image cap">
+        <%= fw.web_name %>
+      </th>
+      
+      <td><%= fw.selected_by_percent %>%</td>
+      <td><%= fw.total_points %></td>
+      <td><%= fw.total_points - highScoreFw.total_points%></td>
+
+      <% if(fw.total_points - avScoreFw > 0) { %> 
+      <td>+<%= fw.total_points - avScoreFw%></td>
+      <% } else { %>
+      <td><%= fw.total_points - avScoreFw%></td>
+      <% } %> 
+
+      <% if(fw.total_points - percentAvgFw > 0) { %> 
+        <td>+<%= fw.total_points - percentAvgFw%></td>
+        <% } else { %>
+        <td><%= fw.total_points - percentAvgFw%></td>
+        <% } %> 
+    </tr>
+    <% } %> 
+  </tbody>
+</table>

@@ -1,0 +1,46 @@
+<% layout('layouts/boilerplate') %>
+
+  <div class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Select Team
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+      <% for(let manager of managers) { %> 
+        <a class="dropdown-item" href="/manager/<%= manager.id %>"><%= manager.team %></a>
+        <% } %> 
+    </div>
+  </div>
+  
+  <h1><%= foundManager.team %> </h1>
+  <h2><%= foundManager.name %> </h2>
+
+  <h3>2022/23</h3>
+
+
+    <div class="row">
+    <% let totalPoints = 0 %> 
+    <%    for(let week of thisSeason) { %>
+      <% totalPoints = totalPoints+= week.points %> 
+    <div class="col-4 m-2 bg-info"><p>GW<%= week.event %> - <%= week.points %> | total points-<%= totalPoints %></p>
+      </div>
+      <% } %> 
+    </div>
+ 
+
+    <p>Average Weekly Points This Season- <%= Math.round(totalPoints / thisSeason.length  * 10) / 10 %> </p>
+
+
+
+
+<div>
+  <h3>Season History</h3>
+  <%    for(let season of seasonHistory) { %>
+    <div>
+      <h5><%= season.season_name %></h5>
+      <p>Total Points - <%= season.total_points %> </p>
+      <p>Average Weekly Points - <%= Math.round(season.total_points / 38  * 10) / 10 %> </p>
+    </div>
+    <% } %> 
+</ul>
+</div>
+
